@@ -56,7 +56,7 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile --only-builtDependencies=esbuild,lightningcss,@tailwindcss/oxide,modern-screenshot
+        run: pnpm install --no-frozen-lockfile --only-built-dependencies=esbuild,lightningcss,@tailwindcss/oxide,modern-screenshot
         working-directory: .
 
       - name: Build portfolio
