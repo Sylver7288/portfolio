@@ -64,7 +64,7 @@ jobs:
         working-directory: .
         env:
           PORT: 3000
-          BASE_PATH: /portfolio/
+          BASE_PATH: /
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

@@ -105,8 +105,22 @@ export function Hero() {
               data-testid="hero-photo-card"
             >
               {/* Photo placeholder — replace src below with real photo path */}
-              <div className="w-32 h-32 rounded-full bg-gradient-to-br from-primary/40 to-purple-500/40 border-2 border-primary/30 flex items-center justify-center text-4xl font-heading font-bold text-primary select-none">
-                OT
+              <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-primary/30 relative">
+                <img
+                  src="/syl.jpg"
+                  className="w-full h-full object-cover"
+                  alt="Onyekwere Tochi Marksylver"
+                  onError={(e) => {
+                    // Fallback to text initials if image fails to load
+                    e.currentTarget.style.display = 'none';
+                    if (e.currentTarget.parentElement) {
+                      const fallback = document.createElement('div');
+                      fallback.className = "w-full h-full bg-gradient-to-br from-primary/40 to-purple-500/40 flex items-center justify-center text-4xl font-heading font-bold text-primary select-none";
+                      fallback.innerText = "OT";
+                      e.currentTarget.parentElement.appendChild(fallback);
+                    }
+                  }}
+                />
               </div>
               <div>
                 <p className="font-heading font-bold text-lg">Tochi Marksylver</p>
