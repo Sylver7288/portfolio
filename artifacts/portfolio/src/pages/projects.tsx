@@ -30,7 +30,7 @@ const allProjects: ProjectDetails[] = [
     tech: ["Platform Management", "REST API Integrations", "Data Analysis", "regulatory Compliance", "B2B Support"],
     color: "from-blue-600/30 via-purple-600/20 to-blue-900/30",
     accent: "text-blue-400",
-    image: "",
+    image: "/casino.png",
   },
   {
     title: "GrowthStream Analytics Override",
@@ -100,7 +100,7 @@ const allProjects: ProjectDetails[] = [
     tech: ["Casino Telemetry APIs", "WebSockets", "Player LTV Analytics", "CRM Marketing Automation", "Node.js"],
     color: "from-purple-600/30 via-rose-600/20 to-purple-950/30",
     accent: "text-purple-400",
-    image: "",
+    image: "/casino.png",
   }
 ];
 

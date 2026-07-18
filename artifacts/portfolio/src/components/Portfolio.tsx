@@ -14,7 +14,7 @@ const projects = [
     tech: ["Platform Management", "Technical Support", "Data Analysis", "Compliance"],
     color: "from-blue-600/30 via-purple-600/20 to-blue-900/30",
     accent: "text-blue-400",
-    image: "",
+    image: "/casino.png",
     link: "#",
   },
   {
