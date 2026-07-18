@@ -11,6 +11,12 @@ import { Switch, Route, Router as WouterRouter } from "wouter";
 import Projects from "@/pages/projects";
 import { Linkedin, Mail, Github } from "lucide-react";
 
+const footerNavItems = ["about", "skills", "services", "portfolio", "contact"];
+
+function scrollToSection(id: string) {
+  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+}
+
 function Footer() {
   return (
     <footer className="py-12 px-6 lg:px-12 bg-background border-t border-border/40">
@@ -23,6 +29,19 @@ function Footer() {
             Web Developer · SEO · Analytics · Design
           </p>
         </div>
+
+        <nav className="grid grid-cols-2 gap-2 w-full max-w-xs md:hidden" aria-label="Footer mobile navigation">
+          {footerNavItems.map((item) => (
+            <button
+              key={item}
+              onClick={() => scrollToSection(item)}
+              className="px-4 py-3 rounded-lg border border-border/50 bg-card/60 text-muted-foreground hover:text-primary hover:border-primary/40 transition-all text-xs font-semibold uppercase tracking-widest"
+              data-testid={`footer-mobile-nav-${item}`}
+            >
+              {item}
+            </button>
+          ))}
+        </nav>
 
         <div className="flex items-center gap-3">
           <a

@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { motion } from "framer-motion";
 
 const navItems = ["about", "skills", "services", "portfolio", "contact"];
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -15,7 +13,6 @@ export function Navbar() {
   }, []);
 
   const scrollTo = (id: string) => {
-    setMobileOpen(false);
     setTimeout(() => {
       document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     }, 100);
@@ -66,51 +63,9 @@ export function Navbar() {
             >
               Hire Me
             </button>
-            {/* Mobile menu button */}
-            <button
-              className="md:hidden p-2 text-muted-foreground hover:text-foreground transition-colors"
-              onClick={() => setMobileOpen((v) => !v)}
-              data-testid="nav-mobile-toggle"
-              aria-label="Toggle menu"
-            >
-              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
           </div>
         </div>
       </motion.header>
-
-      {/* Mobile drawer */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-x-0 top-[65px] z-40 bg-background/98 backdrop-blur-xl border-b border-border/60 shadow-xl md:hidden"
-          >
-            <nav className="flex flex-col px-6 py-6 gap-1">
-              {navItems.map((item) => (
-                <button
-                  key={item}
-                  onClick={() => scrollTo(item)}
-                  className="text-left py-3 px-4 text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors text-sm font-semibold uppercase tracking-widest"
-                  data-testid={`nav-mobile-link-${item}`}
-                >
-                  {item}
-                </button>
-              ))}
-              <button
-                onClick={() => scrollTo("contact")}
-                className="mt-4 py-3 px-4 bg-primary text-primary-foreground font-semibold text-sm rounded-lg hover:bg-primary/90 transition-colors text-center"
-                data-testid="nav-mobile-cta"
-              >
-                Hire Me
-              </button>
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </>
   );
 }
