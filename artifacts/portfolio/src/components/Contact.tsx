@@ -1,45 +1,33 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, MapPin, Send, Linkedin, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
+import { Mail, MapPin, Send, Linkedin, CheckCircle2 } from "lucide-react";
 
 const contactEmail = "marksylver01@gmail.com";
-const contactEndpoint = `https://formsubmit.co/ajax/${contactEmail}`;
 
 export function Contact() {
   const [submitted, setSubmitted] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitting(true);
-    setError("");
 
     const form = e.currentTarget;
     const formData = new FormData(form);
-    const payload = Object.fromEntries(formData.entries());
+    const name = String(formData.get("name") ?? "").trim();
+    const email = String(formData.get("email") ?? "").trim();
+    const subject = String(formData.get("subject") ?? "Project Inquiry").trim();
+    const message = String(formData.get("message") ?? "").trim();
+    const mailSubject = subject || "Project Inquiry";
+    const mailBody = [
+      `Name: ${name}`,
+      `Email: ${email}`,
+      "",
+      "Message:",
+      message,
+    ].join("\n");
 
-    try {
-      const response = await fetch(contactEndpoint, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-
-      if (!response.ok) {
-        throw new Error("Message could not be sent.");
-      }
-
-      form.reset();
-      setSubmitted(true);
-    } catch {
-      setError(`Message failed to send. Please email me directly at ${contactEmail}.`);
-    } finally {
-      setSubmitting(false);
-    }
+    window.location.href = `mailto:${contactEmail}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
+    form.reset();
+    setSubmitted(true);
   };
 
   return (
@@ -126,26 +114,19 @@ export function Contact() {
             {submitted ? (
               <div className="h-full flex flex-col items-center justify-center text-center gap-4 py-12" data-testid="contact-success">
                 <CheckCircle2 className="w-12 h-12 text-green-400" />
-                <h3 className="text-xl font-heading font-bold">Message sent!</h3>
+                <h3 className="text-xl font-heading font-bold">Email draft opened</h3>
                 <p className="text-muted-foreground text-sm max-w-xs">
-                  Thanks for reaching out. I'll get back to you within 24 hours.
+                  Send it from your email app so it reaches me directly at {contactEmail}.
                 </p>
                 <button
-                  onClick={() => {
-                    setSubmitted(false);
-                    setError("");
-                  }}
+                  onClick={() => setSubmitted(false)}
                   className="mt-2 text-xs font-semibold text-primary hover:underline"
                 >
-                  Send another message
+                  Write another message
                 </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5" data-testid="contact-form">
-                <input type="hidden" name="_subject" value="New portfolio contact message" />
-                <input type="hidden" name="_template" value="table" />
-                <input type="hidden" name="_captcha" value="false" />
-                <input type="text" name="_honey" className="hidden" tabIndex={-1} autoComplete="off" />
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div className="space-y-1.5">
                     <label htmlFor="name" className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Name</label>
@@ -199,21 +180,13 @@ export function Contact() {
                   />
                 </div>
 
-                {error && (
-                  <div className="flex items-start gap-2 rounded-lg border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive" role="alert">
-                    <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
-                    <p>{error}</p>
-                  </div>
-                )}
-
                 <button
                   type="submit"
-                  disabled={submitting}
-                  className="w-full bg-primary text-primary-foreground font-semibold rounded-lg py-3.5 flex items-center justify-center gap-2 hover:bg-primary/90 transition-all shadow-[0_0_24px_hsl(var(--primary)/0.2)] text-sm disabled:cursor-not-allowed disabled:opacity-70"
+                  className="w-full bg-primary text-primary-foreground font-semibold rounded-lg py-3.5 flex items-center justify-center gap-2 hover:bg-primary/90 transition-all shadow-[0_0_24px_hsl(var(--primary)/0.2)] text-sm"
                   data-testid="contact-submit"
                 >
-                  {submitting ? "Sending..." : "Send Message"}
-                  {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+                  Open Email Draft
+                  <Send className="w-4 h-4" />
                 </button>
               </form>
             )}
