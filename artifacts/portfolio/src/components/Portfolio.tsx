@@ -36,7 +36,7 @@ const projects = [
     tech: ["WordPress", "PHP", "ACF", "Adobe Creative Suite"],
     color: "from-orange-600/30 via-rose-600/20 to-red-900/30",
     accent: "text-orange-400",
-    image: "",
+    image: "/novahub.png",
     link: "#",
   },
   {
