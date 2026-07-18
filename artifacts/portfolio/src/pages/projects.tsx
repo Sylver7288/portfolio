@@ -14,6 +14,7 @@ interface ProjectDetails {
   tech: string[];
   color: string;
   accent: string;
+  image?: string;
 }
 
 const allProjects: ProjectDetails[] = [
@@ -29,6 +30,7 @@ const allProjects: ProjectDetails[] = [
     tech: ["Platform Management", "REST API Integrations", "Data Analysis", "regulatory Compliance", "B2B Support"],
     color: "from-blue-600/30 via-purple-600/20 to-blue-900/30",
     accent: "text-blue-400",
+    image: "",
   },
   {
     title: "GrowthStream Analytics Override",
@@ -42,6 +44,7 @@ const allProjects: ProjectDetails[] = [
     tech: ["Appsflyer", "Adjust SDK", "Technical SEO", "Google Analytics 4", "Structured Data Schema"],
     color: "from-green-600/30 via-emerald-600/20 to-teal-900/30",
     accent: "text-green-400",
+    image: "",
   },
   {
     title: "Nova Creative Hub Workspace",
@@ -55,6 +58,7 @@ const allProjects: ProjectDetails[] = [
     tech: ["WordPress Core", "PHP", "ACF Pro", "JavaScript ES6", "GSAP / ScrollTrigger", "Figma Design"],
     color: "from-orange-600/30 via-rose-600/20 to-red-900/30",
     accent: "text-orange-400",
+    image: "",
   },
   {
     title: "TechSupport360 Portal",
@@ -68,6 +72,7 @@ const allProjects: ProjectDetails[] = [
     tech: ["React.js", "Express.js", "WebSockets", "Node.js", "Tailwind CSS", "Technical Support Systems"],
     color: "from-cyan-600/30 via-sky-600/20 to-blue-900/30",
     accent: "text-cyan-400",
+    image: "",
   },
   {
     title: "Fintech CashFlow Mobile Integrations",
@@ -81,6 +86,7 @@ const allProjects: ProjectDetails[] = [
     tech: ["Data Pipelines", "Database Schemas", "Campaign Cost Aggregation", "Fraud Prevention", "Adjust Callback API"],
     color: "from-emerald-600/30 via-teal-600/20 to-cyan-950/30",
     accent: "text-emerald-400",
+    image: "",
   },
   {
     title: "Pulse Casino User Engagement Engine",
@@ -94,6 +100,7 @@ const allProjects: ProjectDetails[] = [
     tech: ["Casino Telemetry APIs", "WebSockets", "Player LTV Analytics", "CRM Marketing Automation", "Node.js"],
     color: "from-purple-600/30 via-rose-600/20 to-purple-950/30",
     accent: "text-purple-400",
+    image: "",
   }
 ];
 
@@ -143,10 +150,38 @@ export default function Projects() {
               className="border border-border/40 bg-card rounded-2xl overflow-hidden hover:border-primary/25 transition-all duration-300 grid grid-cols-1 lg:grid-cols-12 hover:shadow-[0_0_50px_hsl(var(--primary)/0.04)]"
             >
               {/* Visual Panel */}
-              <div className={`lg:col-span-4 h-48 lg:h-auto bg-gradient-to-br ${project.color} flex items-center justify-center p-8 border-b lg:border-b-0 lg:border-r border-border/30 relative overflow-hidden`}>
-                <div className="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent" />
-                <div className="text-center z-10">
-                  <span className={`font-mono text-xs tracking-widest uppercase ${project.accent} bg-background/55 border border-border/20 px-3 py-1.5 rounded-full`}>
+              <div className={`lg:col-span-4 min-h-64 lg:h-auto bg-gradient-to-br ${project.color} border-b lg:border-b-0 lg:border-r border-border/30 relative overflow-hidden`}>
+                {project.image ? (
+                  <img
+                    src={project.image}
+                    alt={`${project.title} project preview`}
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div className="absolute inset-5 rounded-2xl border border-white/10 bg-background/20 shadow-2xl backdrop-blur-sm">
+                    <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3">
+                      <span className="h-2.5 w-2.5 rounded-full bg-red-400/80" />
+                      <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/80" />
+                      <span className="h-2.5 w-2.5 rounded-full bg-green-400/80" />
+                    </div>
+                    <div className="space-y-4 p-5">
+                      <div className="h-3 w-3/4 rounded-full bg-white/20" />
+                      <div className="grid grid-cols-2 gap-3">
+                        <div className="h-20 rounded-xl bg-white/10" />
+                        <div className="h-20 rounded-xl bg-white/15" />
+                      </div>
+                      <div className="grid grid-cols-3 gap-2">
+                        <div className="h-10 rounded-lg bg-white/10" />
+                        <div className="h-10 rounded-lg bg-white/15" />
+                        <div className="h-10 rounded-lg bg-white/10" />
+                      </div>
+                    </div>
+                  </div>
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-background/75 via-transparent to-transparent" />
+                <div className="absolute bottom-5 left-5 right-5 z-10">
+                  <span className={`font-mono text-xs tracking-widest uppercase ${project.accent} bg-background/65 border border-border/25 px-3 py-1.5 rounded-full`}>
                     {project.category}
                   </span>
                 </div>

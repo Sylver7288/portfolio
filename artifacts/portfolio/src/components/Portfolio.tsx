@@ -14,6 +14,7 @@ const projects = [
     tech: ["Platform Management", "Technical Support", "Data Analysis", "Compliance"],
     color: "from-blue-600/30 via-purple-600/20 to-blue-900/30",
     accent: "text-blue-400",
+    image: "",
     link: "#",
   },
   {
@@ -24,6 +25,7 @@ const projects = [
     tech: ["Appsflyer", "Adjust", "Technical SEO", "Google Analytics 4"],
     color: "from-green-600/30 via-emerald-600/20 to-teal-900/30",
     accent: "text-green-400",
+    image: "",
     link: "#",
   },
   {
@@ -34,6 +36,7 @@ const projects = [
     tech: ["WordPress", "PHP", "ACF", "Adobe Creative Suite"],
     color: "from-orange-600/30 via-rose-600/20 to-red-900/30",
     accent: "text-orange-400",
+    image: "",
     link: "#",
   },
   {
@@ -44,6 +47,7 @@ const projects = [
     tech: ["React", "Node.js", "REST APIs", "Technical Support"],
     color: "from-cyan-600/30 via-sky-600/20 to-blue-900/30",
     accent: "text-cyan-400",
+    image: "",
     link: "#",
   },
 ];
@@ -108,13 +112,37 @@ export function Portfolio() {
                 data-testid={`project-card-${index}`}
               >
                 {/* Visual panel */}
-                <div className={`lg:col-span-4 h-52 lg:h-auto bg-gradient-to-br ${project.color} flex items-center justify-center p-8 border-b lg:border-b-0 lg:border-r border-border/30 relative overflow-hidden`}>
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-primary/10 to-transparent" />
-                  <div className="text-center z-10">
-                    <span className={`font-mono text-xs tracking-widest uppercase ${project.accent} block mb-2`}>
+                <div className={`lg:col-span-4 min-h-56 lg:h-auto bg-gradient-to-br ${project.color} border-b lg:border-b-0 lg:border-r border-border/30 relative overflow-hidden`}>
+                  {project.image ? (
+                    <img
+                      src={project.image}
+                      alt={`${project.title} project preview`}
+                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="absolute inset-4 rounded-xl border border-white/10 bg-background/20 shadow-2xl backdrop-blur-sm">
+                      <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3">
+                        <span className="h-2.5 w-2.5 rounded-full bg-red-400/80" />
+                        <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/80" />
+                        <span className="h-2.5 w-2.5 rounded-full bg-green-400/80" />
+                      </div>
+                      <div className="space-y-3 p-4">
+                        <div className="h-3 w-3/4 rounded-full bg-white/20" />
+                        <div className="grid grid-cols-3 gap-2">
+                          <div className="h-16 rounded-lg bg-white/10" />
+                          <div className="h-16 rounded-lg bg-white/15" />
+                          <div className="h-16 rounded-lg bg-white/10" />
+                        </div>
+                        <div className="h-3 w-1/2 rounded-full bg-white/15" />
+                      </div>
+                    </div>
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
+                  <div className="absolute bottom-5 left-5 right-5 z-10">
+                    <span className={`font-mono text-xs tracking-widest uppercase ${project.accent} bg-background/70 border border-border/30 px-3 py-1.5 rounded-full`}>
                       {project.category}
                     </span>
-                    <div className={`w-10 h-0.5 ${project.accent.replace("text-", "bg-")} mx-auto opacity-60`} />
                   </div>
                 </div>
 
