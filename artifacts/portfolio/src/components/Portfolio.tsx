@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ExternalLink, ArrowUpRight } from "lucide-react";
+import { ExternalLink, ArrowUpRight, ArrowRight } from "lucide-react";
+import { Link } from "wouter";
 
 const categories = ["All", "Casino & Platform", "Analytics & SEO", "Web & Design"];
 
@@ -134,6 +135,18 @@ export function Portfolio() {
                     <p className="text-muted-foreground text-sm leading-relaxed mb-6">
                       {project.description}
                     </p>
+                    
+                    {project.title === "TechSupport360 Portal" && (
+                      <div className="mb-6">
+                        <Link
+                          href="/projects"
+                          className="inline-flex items-center gap-1 text-xs font-mono text-primary hover:text-primary/80 transition-colors group cursor-pointer"
+                        >
+                          See more
+                          <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                        </Link>
+                      </div>
+                    )}
                   </div>
 
                   <div className="flex flex-wrap gap-2">

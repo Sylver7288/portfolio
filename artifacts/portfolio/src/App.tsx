@@ -8,6 +8,7 @@ import { Portfolio } from "@/components/Portfolio";
 import { Contact } from "@/components/Contact";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Switch, Route, Router as WouterRouter } from "wouter";
+import Projects from "@/pages/projects";
 import { Linkedin, Mail, Github } from "lucide-react";
 
 function Footer() {
@@ -79,6 +80,7 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/projects" component={Projects} />
     </Switch>
   );
 }
