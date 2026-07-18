@@ -74,7 +74,7 @@ export function Contact() {
             </a>
 
             <a
-              href="https://linkedin.com/in/tochimarksylver"
+              href="https://www.linkedin.com/in/marksylver"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-4 group p-4 rounded-xl border border-border/40 bg-background/60 hover:border-[#0A66C2]/40 transition-all"
