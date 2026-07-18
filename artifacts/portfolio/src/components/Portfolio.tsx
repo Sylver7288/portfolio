@@ -25,7 +25,7 @@ const projects = [
     tech: ["Appsflyer", "Adjust", "Technical SEO", "Google Analytics 4"],
     color: "from-green-600/30 via-emerald-600/20 to-teal-900/30",
     accent: "text-green-400",
-    image: "",
+    image: "/seo.jpg",
     link: "#",
   },
   {

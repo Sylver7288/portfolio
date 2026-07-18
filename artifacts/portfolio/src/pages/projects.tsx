@@ -44,7 +44,7 @@ const allProjects: ProjectDetails[] = [
     tech: ["Appsflyer", "Adjust SDK", "Technical SEO", "Google Analytics 4", "Structured Data Schema"],
     color: "from-green-600/30 via-emerald-600/20 to-teal-900/30",
     accent: "text-green-400",
-    image: "",
+    image: "/seo.jpg",
   },
   {
     title: "Nova Creative Hub Workspace",
@@ -86,7 +86,7 @@ const allProjects: ProjectDetails[] = [
     tech: ["Data Pipelines", "Database Schemas", "Campaign Cost Aggregation", "Fraud Prevention", "Adjust Callback API"],
     color: "from-emerald-600/30 via-teal-600/20 to-cyan-950/30",
     accent: "text-emerald-400",
-    image: "",
+    image: "/seo.jpg",
   },
   {
     title: "Pulse Casino User Engagement Engine",
