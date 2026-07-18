@@ -1,13 +1,45 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, MapPin, Send, Linkedin, CheckCircle2 } from "lucide-react";
+import { Mail, MapPin, Send, Linkedin, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
+
+const contactEmail = "hello@tochimarksylver.com";
+const contactEndpoint = `https://formsubmit.co/ajax/${contactEmail}`;
 
 export function Contact() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSubmitting(true);
+    setError("");
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const payload = Object.fromEntries(formData.entries());
+
+    try {
+      const response = await fetch(contactEndpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error("Message could not be sent.");
+      }
+
+      form.reset();
+      setSubmitted(true);
+    } catch {
+      setError("Message failed to send. Please email me directly at hello@tochimarksylver.com.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -99,7 +131,10 @@ export function Contact() {
                   Thanks for reaching out. I'll get back to you within 24 hours.
                 </p>
                 <button
-                  onClick={() => setSubmitted(false)}
+                  onClick={() => {
+                    setSubmitted(false);
+                    setError("");
+                  }}
                   className="mt-2 text-xs font-semibold text-primary hover:underline"
                 >
                   Send another message
@@ -107,11 +142,16 @@ export function Contact() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5" data-testid="contact-form">
+                <input type="hidden" name="_subject" value="New portfolio contact message" />
+                <input type="hidden" name="_template" value="table" />
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="text" name="_honey" className="hidden" tabIndex={-1} autoComplete="off" />
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div className="space-y-1.5">
                     <label htmlFor="name" className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Name</label>
                     <input
                       id="name"
+                      name="name"
                       type="text"
                       className="w-full bg-secondary/40 border border-border/50 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/60 transition-all placeholder:text-muted-foreground/50"
                       placeholder="Your name"
@@ -123,6 +163,7 @@ export function Contact() {
                     <label htmlFor="email" className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Email</label>
                     <input
                       id="email"
+                      name="email"
                       type="email"
                       className="w-full bg-secondary/40 border border-border/50 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/60 transition-all placeholder:text-muted-foreground/50"
                       placeholder="your@email.com"
@@ -136,6 +177,7 @@ export function Contact() {
                   <label htmlFor="subject" className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Subject</label>
                   <input
                     id="subject"
+                    name="subject"
                     type="text"
                     className="w-full bg-secondary/40 border border-border/50 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/60 transition-all placeholder:text-muted-foreground/50"
                     placeholder="Project Inquiry"
@@ -148,6 +190,7 @@ export function Contact() {
                   <label htmlFor="message" className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Message</label>
                   <textarea
                     id="message"
+                    name="message"
                     rows={5}
                     className="w-full bg-secondary/40 border border-border/50 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/60 transition-all resize-none placeholder:text-muted-foreground/50"
                     placeholder="Tell me about your project, timeline, and goals..."
@@ -156,13 +199,21 @@ export function Contact() {
                   />
                 </div>
 
+                {error && (
+                  <div className="flex items-start gap-2 rounded-lg border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive" role="alert">
+                    <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
+                    <p>{error}</p>
+                  </div>
+                )}
+
                 <button
                   type="submit"
-                  className="w-full bg-primary text-primary-foreground font-semibold rounded-lg py-3.5 flex items-center justify-center gap-2 hover:bg-primary/90 transition-all shadow-[0_0_24px_hsl(var(--primary)/0.2)] text-sm"
+                  disabled={submitting}
+                  className="w-full bg-primary text-primary-foreground font-semibold rounded-lg py-3.5 flex items-center justify-center gap-2 hover:bg-primary/90 transition-all shadow-[0_0_24px_hsl(var(--primary)/0.2)] text-sm disabled:cursor-not-allowed disabled:opacity-70"
                   data-testid="contact-submit"
                 >
-                  Send Message
-                  <Send className="w-4 h-4" />
+                  {submitting ? "Sending..." : "Send Message"}
+                  {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
                 </button>
               </form>
             )}
