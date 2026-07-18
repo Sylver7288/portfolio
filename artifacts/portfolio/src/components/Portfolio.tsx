@@ -138,13 +138,7 @@ export function Portfolio() {
                     
                     {project.title === "TechSupport360 Portal" && (
                       <div className="mb-6">
-                        <Link
-                          href="/projects"
-                          className="inline-flex items-center gap-1 text-xs font-mono text-primary hover:text-primary/80 transition-colors group cursor-pointer"
-                        >
-                          See more
-                          <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
-                        </Link>
+                        {/* Removed see more from here */}
                       </div>
                     )}
                   </div>
@@ -164,6 +158,25 @@ export function Portfolio() {
             ))}
           </AnimatePresence>
         </div>
+
+        {/* Big centered View All Projects CTA at the bottom */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-16 text-center border-t border-border/30 pt-12"
+        >
+          <p className="text-muted-foreground text-sm mb-4 font-sans max-w-md mx-auto">
+            Looking for something specific? Browse the complete collection of custom casino platforms, analytic trackers, websites, and service hubs.
+          </p>
+          <Link
+            href="/projects"
+            className="group inline-flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/95 transition-all shadow-[0_0_30px_hsl(var(--primary)/0.2)] hover:shadow-[0_0_40px_hsl(var(--primary)/0.3)] text-sm cursor-pointer"
+          >
+            Explore Complete Portfolio
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </motion.div>
       </div>
     </section>
   );
