@@ -9,19 +9,6 @@ export function Hero() {
       className="relative min-h-[100dvh] flex flex-col justify-center px-6 lg:px-12 pt-24 pb-16 overflow-hidden bg-background"
       data-testid="hero-section"
     >
-      {/* 3D Interactive Globe Background */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[350px] h-[350px] md:w-[650px] md:h-[650px] opacity-15 md:opacity-20 pointer-events-none z-0 select-none">
-        <Globe
-          scale={9}
-          outlineColor="#1ae5fa"
-          graticuleColor="#222227"
-          oceanColor="#09090b"
-          dots={{ color: "#1ae5fa", size: 3, density: 7, allDots: false }}
-          showOutline={true}
-          showGrid={true}
-        />
-      </div>
-
       {/* Decorative blobs */}
       <div className="absolute top-1/4 left-1/4 w-[40vw] h-[40vw] bg-primary/10 rounded-full blur-[120px] pointer-events-none -z-10" />
       <div className="absolute bottom-1/4 right-1/4 w-[30vw] h-[30vw] bg-purple-500/10 rounded-full blur-[100px] pointer-events-none -z-10" />
@@ -103,14 +90,27 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* Right: photo placeholder */}
+        {/* Right: photo placeholder with centered 3D Globe directly in the background */}
         <motion.div
           className="relative flex justify-center lg:justify-end z-10"
           initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          <div className="relative w-72 h-80 lg:w-80 lg:h-96">
+          {/* Centered 3D Globe Ambient Background wrapper - positioned perfectly concentric behind the card */}
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] h-[350px] sm:w-[480px] sm:h-[480px] md:w-[620px] md:h-[620px] lg:w-[650px] lg:h-[650px] opacity-35 md:opacity-45 pointer-events-none z-0 select-none">
+            <Globe
+              scale={9.5}
+              outlineColor="#1ae5fa"
+              graticuleColor="#222227"
+              oceanColor="#09090b"
+              dots={{ color: "#1ae5fa", size: 3.2, density: 7, allDots: false }}
+              showOutline={true}
+              showGrid={true}
+            />
+          </div>
+
+          <div className="relative w-72 h-80 lg:w-80 lg:h-96 z-10">
             {/* Glow ring */}
             <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/10 via-purple-500/10 to-cyan-500/10 blur-2xl scale-110 -z-10" />
             {/* Card */}
