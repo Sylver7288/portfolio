@@ -7,19 +7,21 @@ import { Services } from "@/components/Services";
 import { Portfolio } from "@/components/Portfolio";
 import { Contact } from "@/components/Contact";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { Switch, Route, Router as WouterRouter } from "wouter";
+import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
 import Projects from "@/pages/projects";
-import { Linkedin, Mail, Github } from "lucide-react";
+import { Linkedin, Mail, Github, Home as HomeIcon, UserRound, Wrench, BriefcaseBusiness, Send } from "lucide-react";
 
-const footerNavItems = ["about", "skills", "services", "portfolio", "contact"];
-
-function scrollToSection(id: string) {
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-}
+const mobileNavItems = [
+  { id: "home", label: "Home", Icon: HomeIcon },
+  { id: "about", label: "About", Icon: UserRound },
+  { id: "services", label: "Services", Icon: Wrench },
+  { id: "portfolio", label: "Work", Icon: BriefcaseBusiness },
+  { id: "contact", label: "Contact", Icon: Send },
+];
 
 function Footer() {
   return (
-    <footer className="py-12 px-6 lg:px-12 bg-background border-t border-border/40">
+    <footer className="pt-12 pb-28 md:pb-12 px-6 lg:px-12 bg-background border-t border-border/40">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         <div>
           <p className="font-heading font-extrabold text-xl tracking-tight mb-1">
@@ -29,19 +31,6 @@ function Footer() {
             Web Developer · SEO · Analytics · Design
           </p>
         </div>
-
-        <nav className="grid grid-cols-2 gap-2 w-full max-w-xs md:hidden" aria-label="Footer mobile navigation">
-          {footerNavItems.map((item) => (
-            <button
-              key={item}
-              onClick={() => scrollToSection(item)}
-              className="px-4 py-3 rounded-lg border border-border/50 bg-card/60 text-muted-foreground hover:text-primary hover:border-primary/40 transition-all text-xs font-semibold uppercase tracking-widest"
-              data-testid={`footer-mobile-nav-${item}`}
-            >
-              {item}
-            </button>
-          ))}
-        </nav>
 
         <div className="flex items-center gap-3">
           <a
@@ -80,6 +69,49 @@ function Footer() {
   );
 }
 
+function MobileBottomNav() {
+  const [location, setLocation] = useLocation();
+
+  const goToSection = (id: string) => {
+    const scroll = () => {
+      if (id === "home") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
+
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    };
+
+    if (location !== "/") {
+      setLocation("/");
+      window.setTimeout(scroll, 150);
+      return;
+    }
+
+    scroll();
+  };
+
+  return (
+    <nav
+      className="fixed inset-x-0 bottom-0 z-50 grid grid-cols-5 items-end bg-card/95 border-t border-primary/20 px-2 pt-2 pb-[calc(0.65rem+env(safe-area-inset-bottom))] shadow-[0_-12px_40px_rgba(0,0,0,0.38)] backdrop-blur-xl md:hidden"
+      aria-label="Mobile bottom navigation"
+    >
+      {mobileNavItems.map(({ id, label, Icon }) => (
+        <button
+          key={id}
+          type="button"
+          onClick={() => goToSection(id)}
+          className="flex min-w-0 flex-col items-center justify-center gap-1 rounded-lg px-1 py-1.5 text-muted-foreground transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
+          data-testid={`mobile-bottom-nav-${id}`}
+        >
+          <Icon className="h-5 w-5" strokeWidth={2.4} />
+          <span className="truncate text-[10px] font-semibold uppercase leading-none tracking-wide">{label}</span>
+        </button>
+      ))}
+    </nav>
+  );
+}
+
 function Home() {
   return (
     <main className="min-h-screen bg-background text-foreground selection:bg-primary/30 font-sans">
@@ -109,6 +141,7 @@ function App() {
     <TooltipProvider>
       <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
         <Router />
+        <MobileBottomNav />
       </WouterRouter>
     </TooltipProvider>
   );

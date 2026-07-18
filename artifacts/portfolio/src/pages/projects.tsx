@@ -113,7 +113,7 @@ export default function Projects() {
       <div className="absolute top-1/4 left-1/4 w-[45vw] h-[40vw] bg-primary/5 rounded-full blur-[130px] pointer-events-none -z-10" />
       <div className="absolute bottom-1/4 right-1/4 w-[35vw] h-[35vw] bg-purple-500/5 rounded-full blur-[110px] pointer-events-none -z-10" />
 
-      <main className="max-w-6xl mx-auto px-6 lg:px-12 pt-32 pb-24 relative z-10">
+      <main className="max-w-6xl mx-auto px-6 lg:px-12 pt-32 pb-32 md:pb-24 relative z-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
