@@ -12,6 +12,7 @@ import Projects from "@/pages/projects";
 import { Linkedin, Mail, Github, Home as HomeIcon, UserRound, Wrench, BriefcaseBusiness, Send } from "lucide-react";
 
 const contactEmail = "marksylver01@gmail.com";
+const pendingScrollKey = "portfolioPendingScroll";
 
 const mobileNavItems = [
   { id: "home", label: "Home", Icon: HomeIcon },
@@ -20,6 +21,15 @@ const mobileNavItems = [
   { id: "portfolio", label: "Work", Icon: BriefcaseBusiness },
   { id: "contact", label: "Contact", Icon: Send },
 ];
+
+function scrollToSection(id: string) {
+  if (id === "home") {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    return;
+  }
+
+  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+}
 
 function Footer() {
   return (
@@ -75,22 +85,13 @@ function MobileBottomNav() {
   const [location, setLocation] = useLocation();
 
   const goToSection = (id: string) => {
-    const scroll = () => {
-      if (id === "home") {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-        return;
-      }
-
-      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-    };
-
     if (location !== "/") {
+      window.sessionStorage.setItem(pendingScrollKey, id);
       setLocation("/");
-      window.setTimeout(scroll, 150);
       return;
     }
 
-    scroll();
+    scrollToSection(id);
   };
 
   return (
@@ -115,6 +116,17 @@ function MobileBottomNav() {
 }
 
 function Home() {
+  React.useEffect(() => {
+    const pendingScroll = window.sessionStorage.getItem(pendingScrollKey);
+
+    if (!pendingScroll) {
+      return;
+    }
+
+    window.sessionStorage.removeItem(pendingScrollKey);
+    window.requestAnimationFrame(() => scrollToSection(pendingScroll));
+  }, []);
+
   return (
     <main className="min-h-screen bg-background text-foreground selection:bg-primary/30 font-sans">
       <Navbar />

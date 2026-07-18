@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useLocation } from "wouter";
 
 const navItems = ["about", "skills", "services", "portfolio", "contact"];
+const pendingScrollKey = "portfolioPendingScroll";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [location, setLocation] = useLocation();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -12,10 +15,23 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const goHome = () => {
+    if (location !== "/") {
+      setLocation("/");
+      return;
+    }
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const scrollTo = (id: string) => {
-    setTimeout(() => {
-      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-    }, 100);
+    if (location !== "/") {
+      window.sessionStorage.setItem(pendingScrollKey, id);
+      setLocation("/");
+      return;
+    }
+
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -34,7 +50,7 @@ export function Navbar() {
         <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4 lg:px-12">
           {/* Logo */}
           <button
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            onClick={goHome}
             className="font-heading font-extrabold text-xl tracking-tighter text-foreground hover:text-primary transition-colors"
             data-testid="nav-logo"
           >
