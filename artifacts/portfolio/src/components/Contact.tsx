@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, MapPin, Send, Linkedin, CheckCircle2 } from "lucide-react";
+import { Mail, Send, Linkedin, CheckCircle2 } from "lucide-react";
 import { FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
 
 const contactEmail = "marksylver01@gmail.com";
@@ -120,16 +120,6 @@ export function Contact() {
                 <p className="font-semibold text-sm">@{telegramUsername}</p>
               </div>
             </a>
-
-            <div className="flex items-center gap-4 p-4 rounded-xl border border-border/40 bg-background/60">
-              <div className="w-11 h-11 bg-secondary flex items-center justify-center rounded-xl shrink-0">
-                <MapPin className="w-5 h-5 text-muted-foreground" />
-              </div>
-              <div>
-                <p className="text-xs text-muted-foreground mb-0.5">Location</p>
-                <p className="font-semibold text-sm">Nigeria — Open to Remote</p>
-              </div>
-            </div>
 
             <div className="mt-6 p-5 rounded-xl border border-primary/20 bg-primary/5">
               <p className="text-sm font-semibold text-foreground mb-1">Response time</p>
