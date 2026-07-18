@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, MapPin, Send, Linkedin, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
 
-const contactEmail = "hello@tochimarksylver.com";
+const contactEmail = "marksylver01@gmail.com";
 const contactEndpoint = `https://formsubmit.co/ajax/${contactEmail}`;
 
 export function Contact() {
@@ -36,7 +36,7 @@ export function Contact() {
       form.reset();
       setSubmitted(true);
     } catch {
-      setError("Message failed to send. Please email me directly at hello@tochimarksylver.com.");
+      setError(`Message failed to send. Please email me directly at ${contactEmail}.`);
     } finally {
       setSubmitting(false);
     }
@@ -69,7 +69,7 @@ export function Contact() {
             className="lg:col-span-2 space-y-4"
           >
             <a
-              href="mailto:hello@tochimarksylver.com"
+              href={`mailto:${contactEmail}`}
               className="flex items-center gap-4 group p-4 rounded-xl border border-border/40 bg-background/60 hover:border-primary/40 transition-all"
               data-testid="contact-email-link"
             >
@@ -78,7 +78,7 @@ export function Contact() {
               </div>
               <div>
                 <p className="text-xs text-muted-foreground mb-0.5">Email</p>
-                <p className="font-semibold text-sm">hello@tochimarksylver.com</p>
+                <p className="font-semibold text-sm">{contactEmail}</p>
               </div>
             </a>
 

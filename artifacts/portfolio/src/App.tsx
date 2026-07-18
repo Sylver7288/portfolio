@@ -11,6 +11,8 @@ import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
 import Projects from "@/pages/projects";
 import { Linkedin, Mail, Github, Home as HomeIcon, UserRound, Wrench, BriefcaseBusiness, Send } from "lucide-react";
 
+const contactEmail = "marksylver01@gmail.com";
+
 const mobileNavItems = [
   { id: "home", label: "Home", Icon: HomeIcon },
   { id: "about", label: "About", Icon: UserRound },
@@ -34,7 +36,7 @@ function Footer() {
 
         <div className="flex items-center gap-3">
           <a
-            href="mailto:hello@tochimarksylver.com"
+            href={`mailto:${contactEmail}`}
             className="w-9 h-9 border border-border/50 rounded-lg flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 transition-all"
             aria-label="Email"
             data-testid="footer-email"
