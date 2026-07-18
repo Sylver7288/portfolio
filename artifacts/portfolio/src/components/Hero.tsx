@@ -10,7 +10,7 @@ export function Hero() {
       data-testid="hero-section"
     >
       {/* 3D Interactive Globe Background */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[350px] h-[350px] md:w-[650px] md:h-[650px] opacity-25 md:opacity-35 pointer-events-auto z-0 select-none">
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[350px] h-[350px] md:w-[650px] md:h-[650px] opacity-15 md:opacity-20 pointer-events-none z-0 select-none">
         <Globe
           scale={9}
           outlineColor="#1ae5fa"
@@ -105,17 +105,17 @@ export function Hero() {
 
         {/* Right: photo placeholder */}
         <motion.div
-          className="relative flex justify-center lg:justify-end"
+          className="relative flex justify-center lg:justify-end z-10"
           initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
           <div className="relative w-72 h-80 lg:w-80 lg:h-96">
             {/* Glow ring */}
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/30 via-purple-500/20 to-cyan-500/20 blur-2xl scale-110 -z-10" />
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/10 via-purple-500/10 to-cyan-500/10 blur-2xl scale-110 -z-10" />
             {/* Card */}
             <div
-              className="w-full h-full rounded-2xl border border-border/50 bg-card overflow-hidden flex flex-col items-center justify-center gap-4 text-center p-6 relative"
+              className="w-full h-full rounded-2xl border border-border/50 bg-card/90 backdrop-blur-md overflow-hidden flex flex-col items-center justify-center gap-4 text-center p-6 relative"
               data-testid="hero-photo-card"
             >
               {/* Photo placeholder — replace src below with real photo path */}
