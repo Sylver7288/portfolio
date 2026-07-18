@@ -6,7 +6,7 @@ import Globe from "@/components/Globe";
 export function Hero() {
   return (
     <section
-      className="relative min-h-[100dvh] flex flex-col justify-center px-6 lg:px-12 pt-24 pb-16 overflow-hidden bg-background"
+      className="relative min-h-[100dvh] flex flex-col justify-center px-5 sm:px-6 lg:px-12 pt-24 pb-16 overflow-hidden bg-background"
       data-testid="hero-section"
     >
       {/* Decorative blobs */}
@@ -31,7 +31,7 @@ export function Hero() {
           </motion.div>
 
           <motion.h1
-            className="text-5xl sm:text-6xl md:text-7xl font-heading font-extrabold leading-[1.05] tracking-tight mb-6"
+            className="text-[2.35rem] sm:text-6xl md:text-7xl font-heading font-extrabold leading-[1.08] tracking-normal mb-6"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
