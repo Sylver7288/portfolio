@@ -47,7 +47,7 @@ const projects = [
     tech: ["React", "Node.js", "REST APIs", "Technical Support"],
     color: "from-cyan-600/30 via-sky-600/20 to-blue-900/30",
     accent: "text-cyan-400",
-    image: "",
+    image: "/tech-support.png",
     link: "#",
   },
 ];
