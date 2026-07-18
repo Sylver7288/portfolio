@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, MapPin, Send, Linkedin, CheckCircle2 } from "lucide-react";
+import { FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
 
 const contactEmail = "marksylver01@gmail.com";
+const whatsappNumber = "639761862141";
+const telegramUsername = "otm083";
 
 export function Contact() {
   const [submitted, setSubmitted] = useState(false);
@@ -83,6 +86,38 @@ export function Contact() {
               <div>
                 <p className="text-xs text-muted-foreground mb-0.5">LinkedIn</p>
                 <p className="font-semibold text-sm">Onyekwere Tochi Marksylver</p>
+              </div>
+            </a>
+
+            <a
+              href={`https://wa.me/${whatsappNumber}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-4 group p-4 rounded-xl border border-border/40 bg-background/60 hover:border-[#25D366]/40 transition-all"
+              data-testid="contact-whatsapp-link"
+            >
+              <div className="w-11 h-11 bg-[#25D366]/10 border border-[#25D366]/20 flex items-center justify-center rounded-xl shrink-0 group-hover:bg-[#25D366] group-hover:border-[#25D366] transition-all">
+                <FaWhatsapp className="w-5 h-5 text-[#25D366] group-hover:text-white transition-colors" />
+              </div>
+              <div>
+                <p className="text-xs text-muted-foreground mb-0.5">WhatsApp</p>
+                <p className="font-semibold text-sm">+{whatsappNumber}</p>
+              </div>
+            </a>
+
+            <a
+              href={`https://t.me/${telegramUsername}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-4 group p-4 rounded-xl border border-border/40 bg-background/60 hover:border-[#229ED9]/40 transition-all"
+              data-testid="contact-telegram-link"
+            >
+              <div className="w-11 h-11 bg-[#229ED9]/10 border border-[#229ED9]/20 flex items-center justify-center rounded-xl shrink-0 group-hover:bg-[#229ED9] group-hover:border-[#229ED9] transition-all">
+                <FaTelegramPlane className="w-5 h-5 text-[#229ED9] group-hover:text-white transition-colors" />
+              </div>
+              <div>
+                <p className="text-xs text-muted-foreground mb-0.5">Telegram</p>
+                <p className="font-semibold text-sm">@{telegramUsername}</p>
               </div>
             </a>
 
