@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, ChevronDown, Download } from "lucide-react";
+import Globe from "@/components/Globe";
 
 export function Hero() {
   return (
@@ -8,9 +9,22 @@ export function Hero() {
       className="relative min-h-[100dvh] flex flex-col justify-center px-6 lg:px-12 pt-24 pb-16 overflow-hidden bg-background"
       data-testid="hero-section"
     >
+      {/* 3D Interactive Globe Background */}
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[350px] h-[350px] md:w-[650px] md:h-[650px] opacity-25 md:opacity-35 pointer-events-auto z-0 select-none">
+        <Globe
+          scale={9}
+          outlineColor="#1ae5fa"
+          graticuleColor="#222227"
+          oceanColor="#09090b"
+          dots={{ color: "#1ae5fa", size: 3, density: 7, allDots: false }}
+          showOutline={true}
+          showGrid={true}
+        />
+      </div>
+
       {/* Decorative blobs */}
-      <div className="absolute top-1/4 left-1/4 w-[40vw] h-[40vw] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-[30vw] h-[30vw] bg-purple-500/10 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/4 w-[40vw] h-[40vw] bg-primary/10 rounded-full blur-[120px] pointer-events-none -z-10" />
+      <div className="absolute bottom-1/4 right-1/4 w-[30vw] h-[30vw] bg-purple-500/10 rounded-full blur-[100px] pointer-events-none -z-10" />
 
       <div className="relative z-10 max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         {/* Left: text */}
