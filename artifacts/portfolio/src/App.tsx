@@ -36,9 +36,14 @@ function Footer() {
     <footer className="pt-12 pb-28 md:pb-12 px-6 lg:px-12 bg-background border-t border-border/40">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         <div>
-          <p className="font-heading font-extrabold text-xl tracking-tight mb-1">
-            OTM<span className="text-primary">.</span>
-          </p>
+          <div className="mb-2 flex items-center justify-center gap-3 md:justify-start">
+            <img
+              src="/sylvsss-logo.png"
+              alt="Sylvsss logo"
+              className="h-10 w-10 rounded-xl border border-primary/20 object-cover shadow-[0_0_18px_hsl(var(--primary)/0.14)]"
+            />
+            <p className="font-heading font-extrabold text-xl tracking-tight">Marksylver</p>
+          </div>
           <p className="text-muted-foreground text-sm">
             Web Developer · SEO · Analytics · Design
           </p>

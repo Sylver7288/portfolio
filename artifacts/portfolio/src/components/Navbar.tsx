@@ -51,10 +51,18 @@ export function Navbar() {
           {/* Logo */}
           <button
             onClick={goHome}
-            className="font-heading font-extrabold text-xl tracking-tighter text-foreground hover:text-primary transition-colors"
+            className="group flex items-center gap-3 text-foreground transition-colors hover:text-primary"
             data-testid="nav-logo"
+            aria-label="Go to home"
           >
-            OTM<span className="text-primary">.</span>
+            <img
+              src="/sylvsss-logo.png"
+              alt="Sylvsss logo"
+              className="h-10 w-10 rounded-xl border border-primary/20 object-cover shadow-[0_0_18px_hsl(var(--primary)/0.18)] transition-transform group-hover:scale-105"
+            />
+            <span className="hidden sm:inline font-heading font-extrabold text-lg tracking-tight">
+              Marksylver
+            </span>
           </button>
 
           {/* Desktop nav */}
