@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, Link } from "wouter";
-import { ArrowLeft, ExternalLink, Code, Layers, FileText, BarChart, ShieldCheck } from "lucide-react";
+import { ArrowLeft, ExternalLink, Code, Layers, FileText, BarChart, ShieldCheck, ImagePlus, Save, Trash2 } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { motion } from "framer-motion";
 
@@ -104,6 +104,197 @@ const allProjects: ProjectDetails[] = [
   }
 ];
 
+interface ProjectDraft {
+  title: string;
+  category: string;
+  story: string;
+  impact: string;
+  image: string;
+}
+
+const emptyDraft: ProjectDraft = {
+  title: "",
+  category: "Web & Design",
+  story: "",
+  impact: "",
+  image: "",
+};
+
+const draftStorageKey = "portfolioProjectDraft";
+
+function ProjectDraftStudio() {
+  const [draft, setDraft] = useState<ProjectDraft>(emptyDraft);
+  const [saved, setSaved] = useState(false);
+
+  useEffect(() => {
+    const storedDraft = window.localStorage.getItem(draftStorageKey);
+
+    if (storedDraft) {
+      setDraft(JSON.parse(storedDraft) as ProjectDraft);
+    }
+  }, []);
+
+  const updateDraft = (field: keyof ProjectDraft, value: string) => {
+    setSaved(false);
+    setDraft((current) => ({ ...current, [field]: value }));
+  };
+
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+
+    if (!file) {
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => updateDraft("image", String(reader.result));
+    reader.readAsDataURL(file);
+  };
+
+  const saveDraft = () => {
+    window.localStorage.setItem(draftStorageKey, JSON.stringify(draft));
+    setSaved(true);
+  };
+
+  const clearDraft = () => {
+    window.localStorage.removeItem(draftStorageKey);
+    setDraft(emptyDraft);
+    setSaved(false);
+  };
+
+  return (
+    <motion.section
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      className="mb-16 grid grid-cols-1 gap-6 rounded-2xl border border-primary/15 bg-card/70 p-5 shadow-[0_0_45px_hsl(var(--primary)/0.05)] md:p-8 lg:grid-cols-12"
+    >
+      <div className="lg:col-span-5">
+        <p className="mb-3 font-mono text-xs uppercase tracking-widest text-primary">Project Draft Studio</p>
+        <h2 className="mb-3 font-heading text-2xl font-extrabold md:text-3xl">Preview a New Project Story</h2>
+        <p className="mb-6 text-sm leading-relaxed text-muted-foreground">
+          Upload a preview image, write the project story, and save the draft in this browser while you shape the final portfolio entry.
+        </p>
+
+        <div className="space-y-4">
+          <label className="block">
+            <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">Preview image</span>
+            <div className="flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-dashed border-primary/30 bg-background/60 px-4 py-5 text-sm font-semibold text-primary transition-colors hover:border-primary/60 hover:bg-primary/5">
+              <ImagePlus className="h-5 w-5" />
+              Upload project preview
+              <input type="file" accept="image/*" className="hidden" onChange={handleImageUpload} />
+            </div>
+          </label>
+
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <label className="block">
+              <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">Project title</span>
+              <input
+                value={draft.title}
+                onChange={(event) => updateDraft("title", event.target.value)}
+                placeholder="Project name"
+                className="w-full rounded-lg border border-border/50 bg-secondary/40 px-4 py-3 text-sm transition-all placeholder:text-muted-foreground/50 focus:border-primary/60 focus:outline-none focus:ring-2 focus:ring-primary/40"
+              />
+            </label>
+
+            <label className="block">
+              <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">Category</span>
+              <select
+                value={draft.category}
+                onChange={(event) => updateDraft("category", event.target.value)}
+                className="w-full rounded-lg border border-border/50 bg-secondary/40 px-4 py-3 text-sm transition-all focus:border-primary/60 focus:outline-none focus:ring-2 focus:ring-primary/40"
+              >
+                <option>Web & Design</option>
+                <option>Analytics & SEO</option>
+                <option>Casino & Platform</option>
+                <option>Technical Support</option>
+              </select>
+            </label>
+          </div>
+
+          <label className="block">
+            <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">Project story</span>
+            <textarea
+              value={draft.story}
+              onChange={(event) => updateDraft("story", event.target.value)}
+              rows={5}
+              placeholder="What did you build, what problem did it solve, and what was your role?"
+              className="w-full resize-none rounded-lg border border-border/50 bg-secondary/40 px-4 py-3 text-sm transition-all placeholder:text-muted-foreground/50 focus:border-primary/60 focus:outline-none focus:ring-2 focus:ring-primary/40"
+            />
+          </label>
+
+          <label className="block">
+            <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">Result or impact</span>
+            <input
+              value={draft.impact}
+              onChange={(event) => updateDraft("impact", event.target.value)}
+              placeholder="Example: Reduced support time by 40%"
+              className="w-full rounded-lg border border-border/50 bg-secondary/40 px-4 py-3 text-sm transition-all placeholder:text-muted-foreground/50 focus:border-primary/60 focus:outline-none focus:ring-2 focus:ring-primary/40"
+            />
+          </label>
+
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <button
+              type="button"
+              onClick={saveDraft}
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+            >
+              <Save className="h-4 w-4" />
+              Save Draft
+            </button>
+            <button
+              type="button"
+              onClick={clearDraft}
+              className="inline-flex items-center justify-center gap-2 rounded-lg border border-border/50 px-5 py-3 text-sm font-semibold text-muted-foreground transition-colors hover:border-primary/40 hover:text-primary"
+            >
+              <Trash2 className="h-4 w-4" />
+              Clear
+            </button>
+          </div>
+
+          {saved && <p className="text-xs font-semibold text-primary">Draft saved in this browser.</p>}
+        </div>
+      </div>
+
+      <div className="lg:col-span-7">
+        <div className="h-full overflow-hidden rounded-2xl border border-border/40 bg-background">
+          <div className="relative min-h-72 overflow-hidden bg-gradient-to-br from-cyan-600/20 via-slate-900 to-purple-700/20">
+            {draft.image ? (
+              <img src={draft.image} alt="Uploaded project preview" className="absolute inset-0 h-full w-full object-cover" />
+            ) : (
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-muted-foreground">
+                <ImagePlus className="h-10 w-10 text-primary/70" />
+                <p className="text-sm font-semibold">Preview image appears here</p>
+              </div>
+            )}
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/15 to-transparent" />
+            <div className="absolute bottom-5 left-5 right-5">
+              <span className="rounded-full border border-primary/25 bg-background/70 px-3 py-1.5 font-mono text-xs uppercase tracking-widest text-primary">
+                {draft.category}
+              </span>
+            </div>
+          </div>
+
+          <div className="p-6 md:p-8">
+            <h3 className="mb-3 font-heading text-2xl font-extrabold">
+              {draft.title || "Your project title"}
+            </h3>
+            <p className="mb-5 text-sm leading-relaxed text-muted-foreground">
+              {draft.story || "Write the project story here so you can see how it will read inside the portfolio before we publish it."}
+            </p>
+            <div className="rounded-xl border border-primary/15 bg-primary/5 p-4">
+              <p className="mb-1 text-xs font-extrabold text-primary">PROJECT IMPACT</p>
+              <p className="text-xs leading-relaxed text-muted-foreground">
+                {draft.impact || "Add the measurable result, client outcome, or business improvement."}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </motion.section>
+  );
+}
+
 export default function Projects() {
   const [, setLocation] = useLocation();
 
@@ -138,6 +329,8 @@ export default function Projects() {
             A comprehensive compilation of products, architectures, and platforms I have engineered, optimized, and managed throughout my multi-disciplinary digital career.
           </p>
         </motion.div>
+
+        <ProjectDraftStudio />
 
         {/* Projects Listing Grid */}
         <div className="space-y-12">
