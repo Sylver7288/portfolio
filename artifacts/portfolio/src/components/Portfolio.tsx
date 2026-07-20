@@ -195,13 +195,13 @@ export function Portfolio() {
           className="mt-16 text-center border-t border-border/30 pt-12"
         >
           <p className="text-muted-foreground text-sm mb-4 font-sans max-w-md mx-auto">
-            Looking for something specific? Browse the complete collection of custom casino platforms, analytic trackers, websites, and service hubs.
+            Looking for something specific? Browse the full collection with real preview images, project details, tools used, and available site or APK demo links.
           </p>
           <Link
             href="/projects"
             className="group inline-flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/95 transition-all shadow-[0_0_30px_hsl(var(--primary)/0.2)] hover:shadow-[0_0_40px_hsl(var(--primary)/0.3)] text-sm cursor-pointer"
           >
-            Explore Complete Portfolio
+            Explore All Projects
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </motion.div>
