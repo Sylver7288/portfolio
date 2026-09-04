@@ -105,7 +105,7 @@ const allProjects: ProjectDetails[] = [
     image: "/Casino.png",
   },
   {
-    title: "Custom Gaming CMS & Telegram Support Portal",
+    title: "Teen Patti Stars — Custom CMS & Web Platform",
     category: "CMS & Real-Time Support",
     role: "Node.js Full-Stack Engineer",
     description:
