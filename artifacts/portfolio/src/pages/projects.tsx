@@ -103,7 +103,30 @@ const allProjects: ProjectDetails[] = [
     color: "from-purple-600/30 via-rose-600/20 to-purple-950/30",
     accent: "text-purple-400",
     image: "/Casino.png",
-  }
+  },
+  {
+    title: "Custom Gaming CMS & Telegram Support Portal",
+    category: "CMS & Real-Time Support",
+    role: "Node.js Full-Stack Engineer",
+    description:
+      "Designed and engineered a high-performance gaming portal and custom CMS with dynamic content management, real-time customer support, payment receipt verification, and Telegram escalation workflows.",
+    detailedDescription:
+      "Built a lightweight MVC platform with Express, SQLite, Tailwind CSS, and Multer for rich-text blogs, landing pages, reviews, FAQs, promotional banners, media uploads, and SEO metadata. Engineered a live support widget with an automated knowledge-base bot, Server-Sent Events for real-time updates, and Telegram Bot API topics for seamless operator handoff. Added dynamic XML sitemaps, robots.txt generation, canonical redirects, Open Graph cards, JSON-LD structured data, strict security headers, HSTS, input sanitization, rate limiting, and PM2 clustering for reliable Linux and aaPanel deployments.",
+    impact:
+      "Delivered sub-second page performance with server response times under 100ms, full mobile responsiveness, and a proprietary CMS and support system with no recurring third-party SaaS costs.",
+    tech: [
+      "Node.js",
+      "Express",
+      "SQLite",
+      "Tailwind CSS",
+      "Server-Sent Events",
+      "Telegram Bot API",
+      "Technical SEO",
+      "PM2",
+    ],
+    color: "from-amber-600/30 via-orange-600/20 to-slate-950/30",
+    accent: "text-amber-400",
+  },
 ];
 
 export default function Projects() {
