@@ -126,6 +126,7 @@ const allProjects: ProjectDetails[] = [
     ],
     color: "from-amber-600/30 via-orange-600/20 to-slate-950/30",
     accent: "text-amber-400",
+    image: "/tps-upwork.png",
   },
 ];
 
