@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { projectsData, getProjectBySlug, ProjectItem } from "@/data/projects";
+import { useSEO } from "@/hooks/use-seo";
 
 export default function ProjectDetail() {
   const [, params] = useRoute<{ slug: string }>("/project/:slug");
@@ -24,6 +25,32 @@ export default function ProjectDetail() {
   const project: ProjectItem | undefined = getProjectBySlug(slug);
 
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  useSEO({
+    title: project
+      ? `${project.title} | Case Study by Tochi Marksylver`
+      : "Project Case Study | Tochi Marksylver",
+    description: project
+      ? project.description
+      : "Detailed case study and technical breakdown by Onyekwere Tochi Marksylver.",
+    image: project?.image,
+    schema: project
+      ? {
+          "@context": "https://schema.org",
+          "@type": "CreativeWork",
+          name: project.title,
+          headline: project.title,
+          description: project.description,
+          author: {
+            "@type": "Person",
+            name: "Onyekwere Tochi Marksylver",
+          },
+          image: project.image,
+          keywords: project.tech.join(", "),
+          url: project.siteUrl,
+        }
+      : undefined,
+  });
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });

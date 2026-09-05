@@ -1,2 +1,30 @@
 User-agent: *
 Allow: /
+
+# Allow AI Search & Model Training Crawlers (AI SEO / GEO)
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Anthropic-ai
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+Sitemap: https://portfolio.pola88.one/sitemap.xml
+Sitemap: https://portfolio.sylver.win/sitemap.xml

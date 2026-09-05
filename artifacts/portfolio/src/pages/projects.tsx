@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowRight, ExternalLink, Download, ArrowUpRight } from "luc
 import { Navbar } from "@/components/Navbar";
 import { motion, AnimatePresence } from "framer-motion";
 import { projectsData } from "@/data/projects";
+import { useSEO } from "@/hooks/use-seo";
 
 const filterCategories = [
   "All",
@@ -16,6 +17,12 @@ const filterCategories = [
 export default function Projects() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [, setLocation] = useLocation();
+
+  useSEO({
+    title: "Projects & Engineering Case Studies | Onyekwere Tochi Marksylver",
+    description:
+      "Browse the complete project portfolio of Onyekwere Tochi Marksylver — full-stack applications, technical SEO implementations, casino management platforms, and mobile attribution setups.",
+  });
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
