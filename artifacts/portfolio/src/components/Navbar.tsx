@@ -82,7 +82,7 @@ export function Navbar() {
           <div className="flex items-center gap-3">
             <button
               onClick={() => scrollTo("contact")}
-              className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground font-semibold text-xs rounded-lg hover:bg-primary/90 transition-colors shadow-[0_0_20px_hsl(var(--primary)/0.3)]"
+              className="inline-flex items-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 bg-primary text-primary-foreground font-heading font-bold text-xs rounded-lg hover:bg-primary/90 transition-all shadow-[0_0_20px_hsl(var(--primary)/0.3)] cursor-pointer"
               data-testid="nav-cta-contact"
             >
               Hire Me
