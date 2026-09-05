@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, ChevronDown, Download } from "lucide-react";
+import { ArrowRight, ChevronDown, Mail } from "lucide-react";
 import Globe from "@/components/Globe";
 
 export function Hero() {
@@ -84,7 +84,7 @@ export function Hero() {
               className="flex items-center gap-2 px-7 py-3.5 border border-border/60 text-foreground font-semibold rounded-lg hover:border-primary/50 hover:bg-primary/5 transition-all text-sm"
               data-testid="hero-cta-contact"
             >
-              <Download className="w-4 h-4" />
+              <Mail className="w-4 h-4" />
               Get in Touch
             </button>
           </motion.div>

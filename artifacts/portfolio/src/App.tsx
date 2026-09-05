@@ -69,7 +69,9 @@ function Footer() {
             <Linkedin className="w-4 h-4" />
           </a>
           <a
-            href="#"
+            href="https://github.com/Sylver7288"
+            target="_blank"
+            rel="noopener noreferrer"
             className="w-9 h-9 border border-border/50 rounded-lg flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 transition-all"
             aria-label="GitHub"
             data-testid="footer-github"
