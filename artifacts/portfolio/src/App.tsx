@@ -9,6 +9,7 @@ import { Contact } from "@/components/Contact";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
 import Projects from "@/pages/projects";
+import ProjectDetail from "@/pages/project-detail";
 import { Linkedin, Mail, Github, Home as HomeIcon, UserRound, Wrench, BriefcaseBusiness, Send } from "lucide-react";
 
 const contactEmail = "marksylver01@gmail.com";
@@ -153,6 +154,7 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/projects" component={Projects} />
+      <Route path="/project/:slug" component={ProjectDetail} />
     </Switch>
   );
 }
