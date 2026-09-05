@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, ArrowRight, Sparkles } from "lucide-react";
-import { Link } from "wouter";
+import { ArrowUpRight, ArrowRight } from "lucide-react";
+import { Link, useLocation } from "wouter";
 import { projectsData } from "@/data/projects";
 
 const categories = ["All", "CMS & Real-Time Support", "Casino & Platform", "Analytics & SEO", "Web & Design"];
 
 export function Portfolio() {
   const [activeCategory, setActiveCategory] = useState("All");
+  const [, setLocation] = useLocation();
 
   const filtered = activeCategory === "All"
     ? projectsData
@@ -25,7 +26,7 @@ export function Portfolio() {
           <p className="text-primary font-mono text-xs tracking-widest uppercase mb-3">Work</p>
           <h2 className="text-3xl md:text-5xl font-heading font-bold mb-4">Selected Projects</h2>
           <p className="text-muted-foreground text-lg max-w-2xl">
-            A cross-section of how I combine technical depth with growth thinking, architecture, and design sensibility. Click any project to explore the full case study and screenshots.
+            A cross-section of how I combine technical depth with growth thinking, architecture, and design sensibility. Click any project card to view its full case study, system architecture, and screenshots.
           </p>
         </motion.div>
 
@@ -62,7 +63,12 @@ export function Portfolio() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.97 }}
                 transition={{ duration: 0.4, delay: index * 0.05 }}
-                className="group relative grid grid-cols-1 lg:grid-cols-12 border border-border/40 bg-card rounded-2xl overflow-hidden hover:border-primary/40 transition-all duration-300 hover:shadow-[0_0_40px_hsl(var(--primary)/0.08)]"
+                onClick={(e) => {
+                  const target = e.target as HTMLElement;
+                  if (target.closest("a") || target.closest("button")) return;
+                  setLocation(`/project/${project.slug}`);
+                }}
+                className="group relative grid grid-cols-1 lg:grid-cols-12 border border-border/40 bg-card rounded-2xl overflow-hidden hover:border-primary/40 transition-all duration-300 hover:shadow-[0_0_40px_hsl(var(--primary)/0.08)] cursor-pointer"
                 data-testid={`project-card-${project.slug}`}
               >
                 {/* Visual panel */}

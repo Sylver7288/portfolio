@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "wouter";
-import { ArrowLeft, ArrowRight, ExternalLink, Download, ArrowUpRight, Sparkles } from "lucide-react";
+import { Link, useLocation } from "wouter";
+import { ArrowLeft, ArrowRight, ExternalLink, Download, ArrowUpRight } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { motion, AnimatePresence } from "framer-motion";
 import { projectsData } from "@/data/projects";
@@ -15,6 +15,7 @@ const filterCategories = [
 
 export default function Projects() {
   const [activeCategory, setActiveCategory] = useState("All");
+  const [, setLocation] = useLocation();
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
@@ -87,7 +88,12 @@ export default function Projects() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.98 }}
                 transition={{ duration: 0.4, delay: index * 0.05 }}
-                className="border border-border/40 bg-card rounded-2xl overflow-hidden hover:border-primary/30 transition-all duration-300 grid grid-cols-1 lg:grid-cols-12 hover:shadow-[0_0_50px_hsl(var(--primary)/0.06)] group"
+                onClick={(e) => {
+                  const target = e.target as HTMLElement;
+                  if (target.closest("a") || target.closest("button")) return;
+                  setLocation(`/project/${project.slug}`);
+                }}
+                className="border border-border/40 bg-card rounded-2xl overflow-hidden hover:border-primary/30 transition-all duration-300 grid grid-cols-1 lg:grid-cols-12 hover:shadow-[0_0_50px_hsl(var(--primary)/0.06)] group cursor-pointer"
               >
                 {/* Visual Panel */}
                 <Link
