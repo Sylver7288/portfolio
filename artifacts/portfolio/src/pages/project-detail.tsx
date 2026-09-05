@@ -110,7 +110,7 @@ export default function ProjectDetail() {
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="relative mb-12 rounded-2xl sm:rounded-3xl border border-border/50 bg-card/80 overflow-hidden shadow-2xl group"
+          className="relative mb-6 rounded-2xl sm:rounded-3xl border border-border/50 bg-card/80 overflow-hidden shadow-2xl group"
         >
           <div className={`w-full min-h-[280px] sm:min-h-[420px] lg:min-h-[500px] bg-gradient-to-br ${project.color} relative flex items-center justify-center p-4 sm:p-8`}>
             <img
@@ -131,6 +131,38 @@ export default function ProjectDetail() {
             </button>
           </div>
         </motion.div>
+
+        {/* Action Button Bar Under Image */}
+        {project.siteUrl && (
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.25 }}
+            className="flex flex-wrap items-center justify-center sm:justify-start gap-4 mb-12"
+          >
+            <a
+              href={project.siteUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-heading font-bold text-sm sm:text-base hover:bg-primary/90 transition-all shadow-[0_0_30px_hsl(var(--primary)/0.25)] hover:shadow-[0_0_45px_hsl(var(--primary)/0.4)] group"
+            >
+              <span>Click to View Live Site</span>
+              <ExternalLink className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </a>
+
+            {project.apkUrl && (
+              <a
+                href={project.apkUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl border border-primary/40 text-primary font-semibold text-sm hover:bg-primary/10 transition-all"
+              >
+                <span>Download APK</span>
+                <Download className="w-4 h-4" />
+              </a>
+            )}
+          </motion.div>
+        )}
 
         {/* Key Metrics Strip (if provided) */}
         {project.metrics && project.metrics.length > 0 && (

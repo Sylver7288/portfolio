@@ -74,6 +74,7 @@ export const projectsData: ProjectItem[] = [
     accent: "text-amber-400",
     image: "/tps-upwork.png",
     gallery: ["/tps-upwork.png"],
+    siteUrl: "https://teenpattistars.io",
     featured: true,
   },
   {
