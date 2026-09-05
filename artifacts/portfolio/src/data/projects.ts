@@ -3,6 +3,11 @@ export interface ProjectMetric {
   value: string;
 }
 
+export interface ProjectModule {
+  title: string;
+  items: string[];
+}
+
 export interface ProjectItem {
   slug: string;
   title: string;
@@ -11,6 +16,7 @@ export interface ProjectItem {
   summary: string;
   description: string;
   detailedDescription: string;
+  modules?: ProjectModule[];
   architecture?: string[];
   challenges?: string[];
   solutions?: string[];
@@ -27,6 +33,96 @@ export interface ProjectItem {
 }
 
 export const projectsData: ProjectItem[] = [
+  {
+    slug: "novamoni",
+    title: "Novamoni — Full-Stack Microfinance & Digital Neobank Banking Platform",
+    category: "Fintech & Core Banking",
+    role: "Lead Full-Stack & Fintech Mobile Architect",
+    summary:
+      "Enterprise-grade digital banking and microfinance engine uniting cross-platform mobile neobanking (iOS/Android), administrative compliance portal, and contract-first transactional API backend.",
+    description:
+      "Novamoni is an enterprise-grade digital banking and microfinance engine engineered to deliver frictionless consumer banking alongside robust institutional compliance and back-office controls. Designed from a contract-first architecture (OpenAPI 3.0), the platform bridges consumer mobile banking with enterprise operations through three integrated subsystems: a cross-platform mobile client, an administrative back-office portal, and a resilient, transactional API backend.",
+    detailedDescription:
+      "Architected and engineered an end-to-end neobanking and core microfinance solution uniting mobile consumer banking with institutional regulatory oversight. Engineered from a contract-first OpenAPI 3.0 specification with automated Zod validation layers and React Query hooks via automated codegen. The platform operates across three unified subsystems: a cross-platform mobile client (React Native & Expo SDK 54), an enterprise compliance, KYC, and fraud monitoring back-office portal (React 18 & Vite), and a high-concurrency transactional Node.js/Express 5 API engine backed by PostgreSQL and Drizzle ORM.",
+    modules: [
+      {
+        title: "Consumer Mobile Banking (iOS & Android)",
+        items: [
+          "Tiered Onboarding & Identity (KYC 1–3) with automated BVN/NIN validation and document verification.",
+          "Real-time intra-bank & inter-bank transfers powered by NIBSS EasyPay protocols with dynamic fee calculation.",
+          "Instant virtual debit card issuance, dynamic card masking, and real-time security controls (freeze/unfreeze, limits).",
+          "Target Savings & Automated Vaults with interest calculators, maturity dates, and progress visualizations.",
+          "Integrated utility bill payments, telco airtime/data top-ups, and scheduled recurring payments.",
+          "End-to-end micro-loans lifecycle with repayment scheduling, interest breakdown, and status tracking.",
+        ],
+      },
+      {
+        title: "Core API Server & Financial Transaction Engine",
+        items: [
+          "ACID Transaction Integrity using PostgreSQL + Drizzle ORM strict isolation levels for ledger balance adjustments.",
+          "Automated reconciliation engine for batch settlement discrepancy flagging with external gateways (Paystack/Flutterwave).",
+          "Contract-first OpenAPI 3.0 schemas automatically synchronized to Zod validation layers and React Query hooks.",
+          "Stateless HMAC-signed token auth, scrypt password hashing, token blocklisting, rate-limiting, and immutable audit logs.",
+        ],
+      },
+      {
+        title: "Enterprise Back-Office & Compliance Portal",
+        items: [
+          "User & KYC 360 desk with account freeze/unfreeze controls, document approval workflows, and balance adjustments.",
+          "Real-time transaction monitoring, velocity tracking, and manual intervention controls for high-risk operations.",
+          "Dynamic fee & rule engine for real-time fee thresholds and operational feature flags without redeployments.",
+          "Financial telemetry & analytics dashboards tracking deposit growth, active loans, liquidity, and fee revenue.",
+        ],
+      },
+    ],
+    architecture: [
+      "Three-tier architecture: React Native mobile client, React 18/Vite admin portal, and Express 5 API engine",
+      "Strict PostgreSQL & Drizzle ORM isolation levels ensuring ACID ledger balance integrity across all transfers",
+      "Contract-first OpenAPI 3.0 schema generation with Orval synchronizing Zod validators and React Query hooks",
+      "Stateless HMAC-signed token authentication, scrypt cryptographic hashing, token blocklisting, and audit trails",
+      "Automated batch settlement reconciliation engine interfacing with Paystack and Flutterwave payment gateways",
+      "Tiered KYC 1–3 verification pipeline integrating automated BVN/NIN validation and document verification",
+    ],
+    challenges: [
+      "Preventing race conditions and ledger discrepancies during high-concurrency simultaneous wallet transfers and automated loan repayments.",
+      "Maintaining end-to-end type safety and contract synchronization across mobile, web admin, and backend codebases.",
+      "Delivering instant banking features (virtual cards, vaults, transfers) while maintaining institutional KYC/AML regulatory compliance.",
+    ],
+    solutions: [
+      "Implemented database-level transactional locks and strict isolation levels with Drizzle ORM to guarantee idempotent ledger adjustments.",
+      "Adopted a contract-first OpenAPI 3.0 workflow with Orval to generate Zod validators and typed React Query hooks across all clients.",
+      "Designed an automated 3-tier KYC verification flow paired with real-time velocity monitoring and administrative freeze controls.",
+    ],
+    impact:
+      "Delivered a production-ready, bank-grade neobanking infrastructure supporting real-time inter-bank transfers, instant virtual card issuance, automated savings vaults, and 100% automated settlement reconciliation with zero balance discrepancies.",
+    metrics: [
+      { label: "Ledger Integrity", value: "100% ACID" },
+      { label: "Reconciliation Rate", value: "99.9%" },
+      { label: "API Type Safety", value: "100% End-to-End" },
+      { label: "KYC Tier Automation", value: "3 Tiers" },
+    ],
+    tech: [
+      "React Native",
+      "Expo SDK 54",
+      "React 18",
+      "TypeScript",
+      "Node.js",
+      "Express 5",
+      "PostgreSQL",
+      "Drizzle ORM",
+      "OpenAPI 3.0",
+      "Zod",
+      "Tailwind CSS",
+      "Paystack / Flutterwave",
+      "Recharts",
+      "Vitest",
+    ],
+    color: "from-emerald-600/30 via-teal-600/20 to-cyan-950/30",
+    accent: "text-emerald-400",
+    image: "/novamoni.png",
+    gallery: ["/novamoni.png"],
+    featured: true,
+  },
   {
     slug: "teen-patti-stars",
     title: "Teen Patti Stars — Custom CMS & Web Platform",

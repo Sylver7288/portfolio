@@ -234,6 +234,40 @@ export default function ProjectDetail() {
             </p>
           </motion.section>
 
+          {/* Key System Modules & Features (if provided) */}
+          {project.modules && project.modules.length > 0 && (
+            <motion.section
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="border border-border/40 rounded-2xl p-6 sm:p-8 bg-card/50"
+            >
+              <div className="flex items-center gap-2 text-emerald-400 font-mono text-xs uppercase tracking-widest mb-3">
+                <Layers className="w-4 h-4" />
+                <span>Key System Modules</span>
+              </div>
+              <h2 className="text-xl sm:text-2xl font-heading font-bold mb-6">Core Subsystems & Capabilities</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                {project.modules.map((mod, i) => (
+                  <div key={i} className="flex flex-col p-5 rounded-xl border border-border/30 bg-background/50 space-y-3">
+                    <h3 className="font-heading font-bold text-sm sm:text-base text-foreground flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-emerald-400 shrink-0" />
+                      {mod.title}
+                    </h3>
+                    <ul className="space-y-2.5 text-xs text-muted-foreground leading-relaxed">
+                      {mod.items.map((item, j) => (
+                        <li key={j} className="flex items-start gap-2">
+                          <span className="text-primary font-mono text-xs mt-0.5">•</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </motion.section>
+          )}
+
           {/* Architecture & Engineering Decisions */}
           {project.architecture && project.architecture.length > 0 && (
             <motion.section

@@ -4,7 +4,7 @@ import { ArrowUpRight, ArrowRight } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import { projectsData } from "@/data/projects";
 
-const categories = ["All", "CMS & Real-Time Support", "Casino & Platform", "Analytics & SEO", "Web & Design"];
+const categories = ["All", "Fintech & Core Banking", "CMS & Real-Time Support", "Casino & Platform", "Analytics & SEO", "Web & Design"];
 
 export function Portfolio() {
   const [activeCategory, setActiveCategory] = useState("All");

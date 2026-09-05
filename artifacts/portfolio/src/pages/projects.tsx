@@ -8,6 +8,7 @@ import { useSEO } from "@/hooks/use-seo";
 
 const filterCategories = [
   "All",
+  "Fintech & Core Banking",
   "CMS & Real-Time Support",
   "Casino & Platform",
   "Analytics & SEO",
