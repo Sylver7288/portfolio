@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useLocation } from "wouter";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const navItems = ["about", "skills", "services", "portfolio", "contact"];
 const pendingScrollKey = "portfolioPendingScroll";
@@ -79,7 +80,8 @@ export function Navbar() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            <ThemeToggle />
             <button
               onClick={() => scrollTo("contact")}
               className="inline-flex items-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 bg-primary text-primary-foreground font-heading font-bold text-xs rounded-lg hover:bg-primary/90 transition-all shadow-[0_0_20px_hsl(var(--primary)/0.3)] cursor-pointer"

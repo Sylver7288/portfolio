@@ -7,6 +7,7 @@ import { Services } from "@/components/Services";
 import { Portfolio } from "@/components/Portfolio";
 import { Contact } from "@/components/Contact";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { ThemeProvider } from "@/components/theme-provider";
 import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
 import Projects from "@/pages/projects";
 import ProjectDetail from "@/pages/project-detail";
@@ -161,12 +162,14 @@ function Router() {
 
 function App() {
   return (
-    <TooltipProvider>
-      <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-        <Router />
-        <MobileBottomNav />
-      </WouterRouter>
-    </TooltipProvider>
+    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+      <TooltipProvider>
+        <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+          <Router />
+          <MobileBottomNav />
+        </WouterRouter>
+      </TooltipProvider>
+    </ThemeProvider>
   );
 }
 
